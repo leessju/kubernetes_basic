@@ -1,0 +1,68 @@
+#==== Basic
+# apiVersion: v1
+# kind: ReplicationController
+# metadata:
+#   name: hello-node-rc
+# spec:
+#   replicas: 3
+#   selector:
+#     app: hello-node
+#   template:
+#     metadata:
+#       name: hello-node-pod
+#       labels:
+#         app: hello-node
+#     spec:
+#       containers:
+#       - name: hello-node
+#         image: gcr.io/nicejames-sandbox/hello-node:v1
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 8080
+
+#==== Ingress (users)
+# apiVersion: v1
+# kind: ReplicationController
+# metadata:
+#   name: users-node-rc
+# spec:
+#   replicas: 1
+#   selector:
+#     app: users
+#   template:
+#     metadata:
+#       name: users-pod
+#       labels:
+#         app: users
+#     spec:
+#       containers:
+#       - name: users
+#         image: gcr.io/nicejames-sandbox/hello-node-user:v1
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 8080
+
+#==== Ingress (products)
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: products-node-rc
+spec:
+  replicas: 1
+  selector:
+    app: products
+  template:
+    metadata:
+      name: products-pod
+      labels:
+        app: products
+    spec:
+      containers:
+      - name: products
+        image: gcr.io/nicejames-sandbox/hello-node-product:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+
+
